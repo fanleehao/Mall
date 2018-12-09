@@ -72,10 +72,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li class="active"><a
-							href="${pageContext.request.contextPath}/jsp/product_list.jsp">手机数码<span
-								class="sr-only">(current)</span></a></li>
+					<ul class="nav navbar-nav">						
 						<c:forEach items="${catsList }" var="c">
 							<li><a href="#">${c.cname}</a></li>
 						</c:forEach>

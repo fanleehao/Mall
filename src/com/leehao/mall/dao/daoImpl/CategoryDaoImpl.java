@@ -17,10 +17,9 @@ public class CategoryDaoImpl implements CategoryDao {
 	public List<Category> getAllCats() throws SQLException {
 		// 调用dao
 		String sql = "Select * from category";
-		System.out.println("233333");
 		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
 		List<Category> list = queryRunner.query(sql, new BeanListHandler<Category>(Category.class));
-		System.out.println(list.size());
+//		System.out.println(list.size());
 		return list;
 	}
 
