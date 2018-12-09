@@ -21,6 +21,7 @@
 	href="${pageContext.request.contextPath}/css/style.css" type="text/css" />
 </head>
 
+
 <body>
 	<!--
             	描述：菜单栏
@@ -72,10 +73,10 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">						
-						<c:forEach items="${catsList }" var="c">
+					<ul class="nav navbar-nav" id="category_content">						
+						<%-- <c:forEach items="${catsList }" var="c">
 							<li><a href="#">${c.cname}</a></li>
-						</c:forEach>
+						</c:forEach> --%>
 
 					</ul>
 					<form class="navbar-form navbar-right" role="search">
@@ -92,5 +93,20 @@
 		</nav>
 	</div>
 </body>
-
+<!-- 使用ajax异步加载，在客户端向服务器加载所有分类商品信息 .json格式数据返回，客户端解析-->
+<script type="text/javascript">
+	$(function(){
+		//发送请求
+		var url = "/Mall/CategoryServlet";
+		var obj = {"method": "findAllCats"};
+		$.post(url, obj, function(data){
+			//alert(data);
+			//将获取到的数据，进行动态加载到分类标签中
+			$.each(data, function(i, obj){
+				var li = "<li><a href='#'>" + obj.cname + "</a></li>";
+				$("#category_content").append(li);
+			});
+		},"json");  //设置了json格式，是能将字符串解析成json对象，方便读取
+ 	});
+</script>
 </html>
