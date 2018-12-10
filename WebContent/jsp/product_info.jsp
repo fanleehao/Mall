@@ -44,51 +44,57 @@ body {
 			</div>
 
 			<div style="margin: 0 auto; width: 950px;">
-				<div class="col-md-6">
-					<img style="opacity: 1; width: 400px; height: 350px;" title=""
-						class="medium"
-						src="${pageContext.request.contextPath}/${product.pimage}">
-				</div>
-
-				<div class="col-md-6">
-					<div>
-						<strong>${product.pname }</strong>
-					</div>
-					<div
-						style="border-bottom: 1px dotted #dddddd; width: 350px; margin: 10px 0 10px 0;">
-						<div>编号：${product.pid }</div>
+				<form id="myForm" method="post"
+					action="${pageContext.request.contextPath}/CartServlet?method=addCartItemToCart">
+					<div class="col-md-6">
+						<img style="opacity: 1; width: 400px; height: 350px;" title=""
+							class="medium"
+							src="${pageContext.request.contextPath}/${product.pimage}">
 					</div>
 
-					<div style="margin: 10px 0 10px 0;">
-						现 价: <strong style="color: #ef0101;">￥：${product.shop_price }元/份</strong>
-						原 价：
-						<del>￥${product.market_price }元/份</del>
-					</div>
+					<div class="col-md-6">
+						<div>
+							<strong>${product.pname }</strong>
+						</div>
+						<div
+							style="border-bottom: 1px dotted #dddddd; width: 350px; margin: 10px 0 10px 0;">
+							<div>编号：${product.pid }</div>
+						</div>
 
-					<div style="margin: 10px 0 10px 0;">
-						促销: <a target="_blank" title="限时抢购 (2014-07-30 ~ 2015-01-01)"
-							style="background-color: #f07373;">限时抢购</a>
-					</div>
+						<div style="margin: 10px 0 10px 0;">
+							现 价: <strong style="color: #ef0101;">￥：${product.shop_price }元/份</strong>
+							原 价：
+							<del>￥${product.market_price }元/份</del>
+						</div>
 
-					<div
-						style="padding: 10px; border: 1px solid #e7dbb1; width: 330px; margin: 15px 0 10px 0;; background-color: #fffee6;">
-						<div style="margin: 5px 0 10px 0;">白色</div>
+						<div style="margin: 10px 0 10px 0;">
+							促销: <a target="_blank" title="限时抢购 (2014-07-30 ~ 2015-01-01)"
+								style="background-color: #f07373;">限时抢购</a>
+						</div>
 
 						<div
-							style="border-bottom: 1px solid #faeac7; margin-top: 20px; padding-left: 10px;">
-							购买数量: <input id="quantity" name="quantity" value="1"
-								maxlength="4" size="10" type="text">
-						</div>
+							style="padding: 10px; border: 1px solid #e7dbb1; width: 330px; margin: 15px 0 10px 0;; background-color: #fffee6;">
+							<div style="margin: 5px 0 10px 0;">白色</div>
 
-						<div style="margin: 20px 0 10px 0;; text-align: center;">
-							<%--加入到购物车 --%>
-							<a href="${pageContext.request.contextPath}/jsp/cart.jsp"> <input
-								style="background: url('${pageContext.request.contextPath}/img/product.gif') no-repeat scroll 0 -600px rgba(0, 0, 0, 0);height:36px;width:127px;"
-								value="加入购物车" type="button">
-							</a> &nbsp;收藏商品
+							<div
+								style="border-bottom: 1px solid #faeac7; margin-top: 20px; padding-left: 10px;">
+								购买数量: <input id="quantity" name="quantity" value="1"
+									maxlength="4" size="10" type="text">
+								<!-- 向服务端发送 商品pid-->
+								<input type="hidden" name="pid" value="${product.pid}" />
+							</div>
+
+							<div style="margin: 20px 0 10px 0;; text-align: center;">
+								<%--加入到购物车 --%>
+								<!-- 取消超链接的默认行为 -->
+								<a href="javascript:void(0)"> <input id="btnId"
+									style="background: url('${pageContext.request.contextPath}/img/product.gif') no-repeat scroll 0 -600px rgba(0, 0, 0, 0);height:36px;width:127px;"
+									value="加入购物车" type="button">
+								</a> &nbsp;收藏商品
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 			<div class="clear"></div>
 			<div style="width: 950px; margin: 0 auto;">
@@ -103,5 +109,15 @@ body {
 	<%@ include file="/jsp/footer.jsp"%>
 
 </body>
-
+<script>
+	$(function() {
+		$("#btnId").click(function() {
+			//alert("233");
+			var formObj = document.getElementById("myForm");
+			//formObj.action="/store_v5/CartServlet";
+			//formObj.method="get";
+			formObj.submit();
+		});
+	});
+</script>
 </html>

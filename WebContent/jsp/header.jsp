@@ -67,7 +67,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">首页</a>
+					<a class="navbar-brand" href="${pageContext.request.contextPath}/IndexServlet">首页</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -103,7 +103,7 @@
 			//alert(data);
 			//将获取到的数据，进行动态加载到分类标签中
 			$.each(data, function(i, obj){
-				var li = "<li><a href='#'>" + obj.cname + "</a></li>";
+				var li = "<li><a href='/Mall/ProductServlet?method=findProductsByCidWithPage&num=1&cid=" + obj.cid + "'>" + obj.cname + "</a></li>";
 				$("#category_content").append(li);
 			});
 		},"json");  //设置了json格式，是能将字符串解析成json对象，方便读取

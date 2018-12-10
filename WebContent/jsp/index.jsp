@@ -73,7 +73,7 @@
 		<div class="container-fluid">
 			<div class="col-md-12">
 				<h2>
-					最新商品&nbsp;&nbsp;<img
+					热门商品&nbsp;&nbsp;<img
 						src="${pageContext.request.contextPath}/img/title2.jpg" />
 				</h2>
 			</div>
@@ -93,12 +93,12 @@
 				<c:forEach items="${hotsProductList}" var="p">
 					<div class="col-md-2"
 						style="text-align: center; height: 200px; padding: 10px 0px;">
-						<a href="product_info.htm"> <img
+						<a href="${pageContext.request.contextPath}/ProductServlet?method=findProductById&pid=${p.pid}"> <img
 							src="${pageContext.request.contextPath}/${p.pimage }" width="130" height="130"
 							style="display: inline-block;">
 						</a>
 						<p>
-							<a href="product_info.html" style='color: #666'>${p.pname }</a>
+							<a href="${pageContext.request.contextPath}/ProductServlet?method=findProductById&pid=${p.pid}" style='color: #666'>${p.pname }</a>
 						</p>
 						<p>
 							<font color="#E4393C" style="font-size: 16px">&yen;${p.shop_price }</font>
@@ -121,7 +121,7 @@
 		<div class="container-fluid">
 			<div class="col-md-12">
 				<h2>
-					热门商品&nbsp;&nbsp;<img
+					最新商品&nbsp;&nbsp;<img
 						src="${pageContext.request.contextPath}/img/title2.jpg" />
 				</h2>
 			</div>
