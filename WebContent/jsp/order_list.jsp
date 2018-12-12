@@ -1,12 +1,12 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html>
 
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>会员登录</title>
+		<title>我的订单</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css" />
 		<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js" type="text/javascript"></script>
 		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js" type="text/javascript"></script>
@@ -32,150 +32,68 @@
 			<div class="row">
 
 				<div style="margin:0 auto; margin-top:10px;width:950px;">
-					<strong>我的订单</strong>
-					<table class="table table-bordered">
-						<tbody>
-							<tr class="success">
-								<th colspan="5">订单编号:9005 </th>
-							</tr>
-							<tr class="warning">
-								<th>图片</th>
-								<th>商品</th>
-								<th>价格</th>
-								<th>数量</th>
-								<th>小计</th>
-							</tr>
-							<tr class="active">
-								<td width="60" width="40%">
-									<input type="hidden" name="id" value="22">
-									<img src="${pageContext.request.contextPath}/products/2/dadonggua.jpg" width="70" height="60">
-								</td>
-								<td width="30%">
-									<a target="_blank"> 有机蔬菜      大冬瓜...</a>
-								</td>
-								<td width="20%">
-									￥298.00
-								</td>
-								<td width="10%">
-									5
-								</td>
-								<td width="15%">
-									<span class="subtotal">￥596.00</span>
-								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr class="success">
-								<th colspan="5">订单编号:9004 </th>
-							</tr>
-							<tr class="warning">
-								<th>图片</th>
-								<th>商品</th>
-								<th>价格</th>
-								<th>数量</th>
-								<th>小计</th>
-							</tr>
-							<tr class="active">
-								<td width="60" width="40%">
-									<input type="hidden" name="id" value="22">
-									<img src="${pageContext.request.contextPath}/products/2/dadonggua.jpg" width="70" height="60">
-								</td>
-								<td width="30%">
-									<a target="_blank"> 有机蔬菜      大冬瓜...</a>
-								</td>
-								<td width="20%">
-									￥298.00
-								</td>
-								<td width="10%">
-									5
-								</td>
-								<td width="15%">
-									<span class="subtotal">￥596.00</span>
-								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr class="success">
-								<th colspan="5">订单编号:9003 </th>
-							</tr>
-							<tr class="warning">
-								<th>图片</th>
-								<th>商品</th>
-								<th>价格</th>
-								<th>数量</th>
-								<th>小计</th>
-							</tr>
-							<tr class="active">
-								<td width="60" width="40%">
-									<input type="hidden" name="id" value="22">
-									<img src="${pageContext.request.contextPath}/products/2/dadonggua.jpg" width="70" height="60">
-								</td>
-								<td width="30%">
-									<a target="_blank"> 有机蔬菜      大冬瓜...</a>
-								</td>
-								<td width="20%">
-									￥298.00
-								</td>
-								<td width="10%">
-									5
-								</td>
-								<td width="15%">
-									<span class="subtotal">￥596.00</span>
-								</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr class="success">
-								<th colspan="5">订单编号:9002 </th>
-							</tr>
-							<tr class="warning">
-								<th>图片</th>
-								<th>商品</th>
-								<th>价格</th>
-								<th>数量</th>
-								<th>小计</th>
-							</tr>
-							<tr class="active">
-								<td width="60" width="40%">
-									<input type="hidden" name="id" value="22">
-									<img src="${pageContext.request.contextPath}/products/2/dadonggua.jpg" width="70" height="60">
-								</td>
-								<td width="30%">
-									<a target="_blank"> 有机蔬菜      大冬瓜...</a>
-								</td>
-								<td width="20%">
-									￥298.00
-								</td>
-								<td width="10%">
-									5
-								</td>
-								<td width="15%">
-									<span class="subtotal">￥596.00</span>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					
+					  <c:if test="${empty pageModel.list }">
+					      <H3><a href="${pageContext.request.contextPath}/IndexServlet">去逛逛？</a></H3>
+					  </c:if>
+					  <c:if test="${not empty pageModel.list }">
+					    <strong>我的订单</strong>
+						<table class="table table-bordered">
+					  	 <c:forEach items="${pageModel.list }" var="order">
+							<tbody>
+								<tr class="success">
+									<th colspan="5">
+										订单编号:${order.oid } 
+										总计: ￥ ${order.total } 元
+										<c:if test="${order.state==1 }">
+											<a href="${pageContext.request.contextPath}/OrderServlet?method=findOrderByOid&oid=${order.oid}">去支付</a>
+										</c:if>
+										<c:if test="${order.state==2 }">
+											未发货
+										</c:if>
+										<c:if test="${order.state==3 }">
+											<a href="">确认收货</a>
+										</c:if>
+										<c:if test="${order.state==4 }">
+											交易关闭
+										</c:if>
+									</th>
+								</tr>
+								<tr class="warning">
+									<th>图片</th>
+									<th>商品</th>
+									<th>价格</th>
+									<th>数量</th>
+									<th>小计</th>
+								</tr>
+								<c:forEach items="${order.orderItems }" var="item">
+									<tr class="active">
+									<td width="60" width="40%">
+										<input type="hidden" name="id" value="22">
+										<img src="${pageContext.request.contextPath}/${item.product.pimage}" width="70" height="60">
+									</td>
+									<td width="30%">
+										<a target="_blank"> ${item.product.pname}</a>
+									</td>
+									<td width="20%">
+										￥${item.product.shop_price}
+									</td>
+									<td width="10%">
+										${item.quantity }
+									</td>
+									<td width="15%">
+										<span class="subtotal">￥${item.total}</span>
+									</td>
+								</tr>
+								</c:forEach>								
+							</tbody>
+						  </c:forEach>
+					  </table>
+					  <%@include file="/jsp/pageFile.jsp" %>
+					</c:if>
 				</div>
-			</div>
-			<div style="text-align: center;">
-				<ul class="pagination">
-					<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
-					<li>
-						<a href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</ul>
-			</div>
+				
+			</div>			
 		</div>
 
 		<%@ include file="/jsp/footer.jsp" %>

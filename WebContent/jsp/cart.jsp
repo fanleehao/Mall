@@ -49,7 +49,7 @@ font {
 		<c:if test="${empty cart.cartItems }">
 			<div class="row">
 				<div class="col-md-12">
-					<h3>去逛逛？</h3>
+					<h3><a href="${pageContext.request.contextPath}/IndexServlet">去逛逛？</a></h3>
 				</div>
 			</div>
 		</c:if>

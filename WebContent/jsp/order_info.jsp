@@ -34,6 +34,7 @@ body {
 <body>
 	<%@ include file="/jsp/header.jsp"%>
 	<div class="container">
+	  <form method="post" id="orderForm" action="${pageContext.request.contextPath}/OrderServlet?method=payOrder">
 		<div class="row">
 
 			<div style="margin: 0 auto; margin-top: 10px; width: 950px;">
@@ -41,7 +42,7 @@ body {
 				<table class="table table-bordered">
 					<tbody>
 						<tr class="warning">
-							<th colspan="5">订单编号:9005</th>
+							<th colspan="5">订单编号:${order.oid }</th>
 						</tr>
 						<tr class="warning">
 							<th>图片</th>
@@ -75,30 +76,29 @@ body {
 
 		<div>
 			<hr />
-			<form class="form-horizontal"
-				style="margin-top: 5px; margin-left: 150px;">
+			
 				<div class="form-group">
-					<label for="username" class="col-sm-1 control-label">地址</label>
+					<label for="username"  class="col-sm-1 control-label">地址</label>
 					<div class="col-sm-5">
-						<input type="text" class="form-control" id="username"
+						<input type="text" name="address" class="form-control" id="username"
 							placeholder="请输入收货地址">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-1 control-label">收货人</label>
 					<div class="col-sm-5">
-						<input type="password" class="form-control" id="inputPassword3"
+						<input type="text" name="name" class="form-control" id="inputPassword3"
 							placeholder="请输收货人">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="confirmpwd" class="col-sm-1 control-label">电话</label>
 					<div class="col-sm-5">
-						<input type="password" class="form-control" id="confirmpwd"
+						<input type="text" name="telephone" class="form-control" id="confirmpwd"
 							placeholder="请输入联系方式">
+						<input type="hidden" name="oid" value="${order.oid }">
 					</div>
 				</div>
-			</form>
 
 			<hr />
 
@@ -143,7 +143,7 @@ body {
 
 			</div>
 		</div>
-
+      </form>
 	</div>
 	<%@ include file="/jsp/footer.jsp"%>
 </body>

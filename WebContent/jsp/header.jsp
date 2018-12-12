@@ -47,7 +47,7 @@
 						href="${pageContext.request.contextPath}/UserServlet?method=logOut">退出</a></li>
 					<li><a href="${pageContext.request.contextPath}/jsp/cart.jsp">购物车</a></li>
 					<li><a
-						href="${pageContext.request.contextPath}/jsp/order_list.jsp">我的订单</a></li>
+						href="${pageContext.request.contextPath}/OrderServlet?method=findMyOrdersWithPage&num=1">我的订单</a></li>
 				</c:if>
 			</ol>
 		</div>
