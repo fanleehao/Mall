@@ -77,7 +77,7 @@ public class LoginFilter implements Filter {
 //				System.out.println("888888");
 //				request.getRequestDispatcher("/jsp/info.jsp").forward(request, response);
 //				System.out.println("999999");
-				return;
+				return; 
 			}
 			//否则自动登录
 			request.getSession().setAttribute("loginUser", loginUser);
