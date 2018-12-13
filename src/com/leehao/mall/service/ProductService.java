@@ -18,4 +18,6 @@ public interface ProductService {
 
 	PageModel findProductsByCidWithPage(String cid, int currentPageNum) throws Exception;
 
+	PageModel findAllProductsWithPage(int curPageNum, int pageSize) throws Exception;
+
 }

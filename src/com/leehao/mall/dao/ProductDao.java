@@ -17,4 +17,8 @@ public interface ProductDao {
 
 	List findProductsByCidWithPage(String cid, int startIndex, int pageSize) throws Exception;
 
+	int findAllRecords() throws Exception;
+
+	List<Product> findAllProductsWithPage(int startIndex, int pageSize) throws Exception;
+
 }

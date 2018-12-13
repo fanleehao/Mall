@@ -9,4 +9,12 @@ public interface CategoryService {
 
 	List<Category> getAllCats() throws SQLException;
 
+	void addCategory(Category category)throws Exception;
+
+	Category findCategoryById(String cid) throws Exception;
+
+	void editCategory(Category category)throws Exception;
+
+	void deleteCategoryById(String cid)throws Exception;
+
 }

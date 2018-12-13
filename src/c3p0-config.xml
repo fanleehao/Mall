@@ -2,7 +2,7 @@
 	<!-- 默认配置，如果没有指定则使用这个配置 -->
 	<default-config>
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
-		<property name="jdbcUrl">jdbc:mysql://localhost:3306/store_40</property>
+		<property name="jdbcUrl">jdbc:mysql://localhost:3306/store_40?useUnicode=true&amp;characterEncoding=utf8</property>
 		<property name="user">root</property>
 		<property name="password">root123</property>
 		<property name="checkoutTimeout">30000</property>
@@ -21,7 +21,7 @@
 	<!-- 命名的配置 -->
 	<named-config name="leehao">
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
-		<property name="jdbcUrl">jdbc:mysql://localhost:3306/store_40</property>
+		<property name="jdbcUrl">jdbc:mysql://localhost:3306/store_40?useUnicode=true&amp;characterEncoding=utf8</property>
 		<property name="user">root</property>
 		<property name="password">root123</property>
     <!-- 如果池中数据连接不够时一次增长多少个 -->

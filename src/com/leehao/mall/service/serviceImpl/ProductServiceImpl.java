@@ -49,4 +49,17 @@ public class ProductServiceImpl implements ProductService {
 		return pageModel;
 	}
 
+	@Override
+	public PageModel findAllProductsWithPage(int curPageNum, int pageSize) throws Exception {
+		//1.构造对象
+		int totalRecords = productDao.findAllRecords();
+		PageModel pageModel = new PageModel(curPageNum, totalRecords, pageSize);
+		//2.关联集合
+		List<Product> list = productDao.findAllProductsWithPage(pageModel.getStartIndex(), pageModel.getPageSize());
+		pageModel.setList(list);
+		//3.关联URL
+		pageModel.setUrl("AdminProductServlet?method=findAllProductsWithPage");
+		return pageModel;
+	}
+
 }

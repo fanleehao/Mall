@@ -16,7 +16,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public List<Product> findNews() throws SQLException {
-		//pflag=0,有货
+		// pflag=0,有货
 		String sql = "Select * from product where pflag=0 order by pdate desc limit 0, 9";
 		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
 		return queryRunner.query(sql, new BeanListHandler<Product>(Product.class));
@@ -24,7 +24,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public List<Product> findHots() throws SQLException {
-		//pflag=0,有货, is_hot=1最热
+		// pflag=0,有货, is_hot=1最热
 		String sql = "Select * from product where pflag=0 and is_hot=1 order by pdate desc limit 0, 9";
 		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
 		return queryRunner.query(sql, new BeanListHandler<Product>(Product.class));
@@ -41,7 +41,7 @@ public class ProductDaoImpl implements ProductDao {
 	public int findTotalRecords(String cid) throws Exception {
 		String sql = "Select count(*) from product where cid=?";
 		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
-		Long total =  (Long) queryRunner.query(sql, new ScalarHandler(), cid);   //返回long对象，num.intValue()
+		Long total = (Long) queryRunner.query(sql, new ScalarHandler(), cid); // 返回long对象，num.intValue()
 		return total.intValue();
 	}
 
@@ -50,6 +50,23 @@ public class ProductDaoImpl implements ProductDao {
 		String sql = "Select * from product where cid=? limit ?, ?";
 		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
 		return queryRunner.query(sql, new BeanListHandler<Product>(Product.class), cid, startIndex, pageSize);
+	}
+
+	@Override
+	public int findAllRecords() throws Exception {
+		int pflag = 0;
+		String sql = "Select count(*) from product where pflag=?";    //有货商品
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		Long record =  (Long) queryRunner.query(sql, new ScalarHandler(), pflag);
+		return record.intValue();
+	}
+
+	@Override
+	public List<Product> findAllProductsWithPage(int startIndex, int pageSize) throws Exception {
+		int pflag = 0;
+		String sql = "Select * from product where pflag=? order by pdate desc limit ?, ? ";
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		return queryRunner.query(sql, new BeanListHandler<Product>(Product.class), pflag, startIndex, pageSize);
 	}
 
 }
