@@ -139,4 +139,20 @@ public class OrderDaoImpl implements OrderDao {
 
 	}
 
+	@Override
+	public List<Orders> findAllOrders() throws Exception {
+		String sql = "select * from orders order by ordertime desc";
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		
+		return queryRunner.query(sql, new BeanListHandler<Orders>(Orders.class));
+	}
+
+	@Override
+	public List<Orders> findAllOrders(String state) throws Exception {
+		String sql = "select * from orders where state = ? order by ordertime desc";
+		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());		
+		return queryRunner.query(sql, new BeanListHandler<Orders>(Orders.class), state);
+	}
+	
+
 }

@@ -9,20 +9,19 @@ import com.leehao.mall.dao.UserDao;
 import com.leehao.mall.dao.daoImpl.UserDaoImpl;
 import com.leehao.mall.domain.User;
 import com.leehao.mall.service.UserService;
+import com.leehao.mall.utils.BeanFactory;
 
 public class UserServiceImpl implements UserService {
-
+	UserDao userDao = (UserDao) BeanFactory.createObject("UserDao");
 	@Override
 	public void userRegist(User user) throws SQLException {
-		// 实现注册----调用dao
-		UserDao userDao = new UserDaoImpl();
+		// 实现注册----调用dao		
 		userDao.userRegist(user);
 
 	}
 
 	@Override
 	public boolean userActive(String code) throws SQLException {
-		UserDao userDao = new UserDaoImpl();
 		// 返回通过select * from user where code = ?的查询结果，如果查找失败，就返回false
 		User user = userDao.userActive(code);
 		if (null != user) {
@@ -43,8 +42,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User userLogin(User user) throws SQLException {
-		UserDao userDao = new UserDaoImpl();
+	public User userLogin(User user) throws SQLException {		
 
 		// 登录成功,查询数据库select * from user where username=?,password=?
 		User uu = userDao.userLogin(user);
@@ -59,7 +57,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findUserByUserName(String username) throws SQLException {
-		UserDao userDao = new UserDaoImpl();
 		User user = userDao.findUserByUserName(username);
 		return user;
 	}

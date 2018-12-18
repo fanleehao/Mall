@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+   <bean id="CategoryDao" class="com.leehao.mall.dao.daoImpl.CategoryDaoImpl"/>
+   <bean id="UserDao" class="com.leehao.mall.dao.daoImpl.UserDaoImpl"/>
+   <bean id="ProductDao" class="com.leehao.mall.dao.daoImpl.ProductDaoImpl"/>
+</beans>

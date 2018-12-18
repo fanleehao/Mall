@@ -20,4 +20,6 @@ public interface ProductService {
 
 	PageModel findAllProductsWithPage(int curPageNum, int pageSize) throws Exception;
 
+	void saveProduct(Product product) throws Exception;
+
 }

@@ -3,18 +3,16 @@ package com.leehao.mall.service.serviceImpl;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.JDesktopPane;
-
 import com.leehao.mall.dao.CategoryDao;
-import com.leehao.mall.dao.daoImpl.CategoryDaoImpl;
 import com.leehao.mall.domain.Category;
 import com.leehao.mall.service.CategoryService;
+import com.leehao.mall.utils.BeanFactory;
 import com.leehao.mall.utils.JedisUtils;
 
 import redis.clients.jedis.Jedis;
 
 public class CategoryServiceImpl implements CategoryService {
-	CategoryDao categoryDao = new CategoryDaoImpl();
+	CategoryDao categoryDao = (CategoryDao) BeanFactory.createObject("CategoryDao");
 
 	@Override
 	public List<Category> getAllCats() throws SQLException {

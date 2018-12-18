@@ -8,9 +8,10 @@ import com.leehao.mall.dao.daoImpl.ProductDaoImpl;
 import com.leehao.mall.domain.PageModel;
 import com.leehao.mall.domain.Product;
 import com.leehao.mall.service.ProductService;
+import com.leehao.mall.utils.BeanFactory;
 
 public class ProductServiceImpl implements ProductService {
-	private ProductDao productDao = new ProductDaoImpl();
+	ProductDao productDao = (ProductDao) BeanFactory.createObject("ProductDao");
 
 	@Override
 	public List<Product> findNews() throws SQLException {
@@ -61,5 +62,13 @@ public class ProductServiceImpl implements ProductService {
 		pageModel.setUrl("AdminProductServlet?method=findAllProductsWithPage");
 		return pageModel;
 	}
+
+	@Override
+	public void saveProduct(Product product) throws Exception {
+		//调用dao,保存进数据库
+		productDao.saveProduct(product);
+		
+	}
+	
 
 }

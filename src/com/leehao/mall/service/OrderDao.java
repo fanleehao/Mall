@@ -8,6 +8,8 @@ import com.leehao.mall.domain.OrderItem;
 import com.leehao.mall.domain.Orders;
 import com.leehao.mall.domain.User;
 
+import jdk.nashorn.internal.runtime.ECMAErrors;
+
 public interface OrderDao {
 
 	void addOrder(Connection conn, Orders order)throws SQLException;
@@ -21,5 +23,9 @@ public interface OrderDao {
 	Orders findOrderByOid(String oid) throws Exception;
 
 	void updateOrder(Orders order) throws Exception;
+
+	List<Orders> findAllOrders()throws Exception;
+
+	List<Orders> findAllOrders(String state)throws Exception;
 
 }

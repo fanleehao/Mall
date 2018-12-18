@@ -40,10 +40,11 @@ public class UploadUtils {
 		int i = name.hashCode();
 		String hex = Integer.toHexString(i);
 		int j=hex.length();
-		for(int k=0;k<8-j;k++){
+		for(int k=0;k<8-j;k++){    //最少有8个字符
 			hex="0"+hex;
 		}
-		return "/"+hex.charAt(0)+"/"+hex.charAt(1);
+		return "/"+hex.charAt(0)+"/"+hex.charAt(1) + "/"+hex.charAt(2)+"/"+
+			hex.charAt(3)+"/"+hex.charAt(4)+"/"+hex.charAt(5)+"/"+hex.charAt(6)+"/"+hex.charAt(7);
 	}
 	
 	@SuppressWarnings("unused")
